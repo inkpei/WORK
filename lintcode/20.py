@@ -12,28 +12,28 @@ class Solution:
     # @param {int} n an integer
     # @return {tuple[]} a list of tuple(sum, probability)
     def dicesSum(self, n):
-        tmp = []
-        for i in range(6):
-            tmp.append(1)
-        for i in range(2,n+1):
-            re = []
-            x = 0
-            for j in range(i,6*i+1):
-                k = 1
-                while k <= 6:
-                    if j - k > 0:
-                        print(j , k , i)
-                        x += tmp[j-k-i]
-                    k += 1
-                re.append(x)
-            tmp = re
-        res = []
-        total = 0
-        for i in range(n,6*n+1):
-            total += tmp[n][i]
-        for i in range(n,6*n+1):
-            res.append([i,round(tmp[n][i]/total,2)])
-        return res
+        # Write your code here
+        total = 6 ** n
+        result = []
+        f = [0] * (n * 6 + 1)
+        g = f[:]
+        for i in range(1, 7):
+            f[i] = 1
+        for k in range(2, n + 1):
+            for i in range(1, 6 * k + 1):
+                for j in range(1, 7):
+                    if i - j > 0:
+                        g[i] += f[i - j]
+                    else:
+                        break
+            f = g[:]
+            print(f)
+            g = [0] * (n * 6 + 1)
+        for i in range(1 * n, 6 * n + 1):
+            arr = [i]
+            arr.append(float(f[i]) / float(total))
+            result.append(arr)
+        return result
 
         # Write your code here
 
