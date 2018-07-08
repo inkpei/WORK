@@ -53,11 +53,20 @@ class Solution:
         r = stack()
         p = root
         res = []
-        while p != None or s.length != 0:
+        has_vist = None
+        while p != None:
             while p != None:
                 s.push(p)
                 p = p.left
+        while s.length != 0:
             p = s.pop()
-            p = p.right
-
+            if p.right is None or p.right == has_vist:
+                res.append(p.val)
+                has_vist = p
+            else:
+                s.push(p)
+                p = p.right
+                while p:
+                    s.push(p)
+                    p = p.left
         return res
