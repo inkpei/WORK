@@ -13,11 +13,15 @@ class Solution:
         if not prices:
             return 0
         min = prices[0]
-        max = 0
+        max = min
+        res = 0
 
         for i in prices:
-            if i < min:
-                min = i
+            if i < max:
+                res = res + max - min
+                max = min = i
             else:
-                max = self.Max(max, i - min)
+                max = i
+        res = res + max - min
+        return res
         # write your code here
